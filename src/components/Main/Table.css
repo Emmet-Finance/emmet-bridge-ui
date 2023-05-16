@@ -1,0 +1,90 @@
+.central-frame {
+    border-radius: 20px;
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    margin-top: 10%;
+    padding: 10px;
+    background-color: var(--white);
+    /* box-shadow: 5px 10px var(--gray-100) */
+}
+
+.internal-frame{
+    color: var(--gray-500);
+    font-weight: 900;
+    display:flexbox;
+    flex-direction: row;
+    margin: 10px;
+}
+
+.green-frame{
+    border: solid 2px;
+    border-color: var(--emmet-green);
+    border-radius: 10px;
+    display: flex;
+    justify-content:space-evenly;
+    padding: 10px;
+}
+
+.align-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: -5px;
+    margin-bottom: -20px;
+}
+
+.justify-left {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.internal-divider{
+    border: solid 2px;
+    border-radius: 2px;
+    border-color: var(--gray-500);
+}
+
+.amount-input {
+    margin: 10px;
+    width: 80%;
+    font: 1em sans-serif;
+    color: var(--gray-900);
+    border: 0;
+    outline: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.justify-sides{
+    justify-content: space-between;
+}
+
+.max-button{
+    color: var(--gray-500);
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+    .central-frame {
+        width: 90%;
+        margin-top: 5px;
+    }
+    .green-frame{
+        flex-direction:column-reverse;
+        font-size: 1em;
+    }
+}

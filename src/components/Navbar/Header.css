@@ -1,0 +1,51 @@
+header {
+    background-color: var(--emmet-green);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+}
+
+.emmet-logo {
+    padding: 10px;
+}
+
+.testnet-label {
+    background-color: red;
+    margin: 10px;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.chain-name {
+    margin:10px;
+    padding:5px;
+}
+
+.wallet-button{
+    background-color:darkgoldenrod;
+    margin: 5px;
+    border: solid 1px;
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    height:4vh;
+}
+
+.button-text{
+    margin: 15px;
+}
+
+.button-image {
+    margin-bottom: 5px;
+}
+
+.copy-address {
+    width: 20px;
+    margin: 10px;
+    margin-right: 0;
+}

@@ -1,0 +1,22 @@
+[
+    {
+        "name":"Ethereum",
+        "chainId":"0x1",
+        "imageLink":"/crypto/ethereum.svg"
+    },
+    {
+        "name":"Binance",
+        "chainId":"0x38",
+        "imageLink":"/crypto/bnb.svg"
+    },
+    {
+        "name":"Polygon",
+        "chainId":"0x89",
+        "imageLink":"/crypto/matic.svg"
+    },
+    {
+        "name":"Fuse",
+        "chainId":"0x7A",
+        "imageLink":"/crypto/fuse.svg"
+    }
+]

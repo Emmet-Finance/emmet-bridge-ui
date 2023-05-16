@@ -1,0 +1,22 @@
+[
+    {
+        "name":"Goerly",
+        "chainId":"0x5",
+        "imageLink":"/crypto/ethereum.svg"
+    },
+    {
+        "name":"Binance",
+        "chainId":"0x61",
+        "imageLink":"/crypto/bnb.svg"
+    },
+    {
+        "name":"Mumbai",
+        "chainId":"0x13881",
+        "imageLink":"/crypto/matic.svg"
+    },
+    {
+        "name":"Fuse",
+        "chainId":"0x7B",
+        "imageLink":"/crypto/fuse.svg"
+    }
+]

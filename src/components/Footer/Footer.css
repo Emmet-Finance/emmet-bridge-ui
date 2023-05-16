@@ -1,0 +1,29 @@
+footer {
+    background-color: var(--emmet-green);
+    color: var(--white);
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+    justify-content: space-between;
+}
+.footer-column {
+    display: inline-flex;
+}
+
+.footer-link{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+}
+
+.footer-image {
+    height: 30px;
+    padding: 10px;
+}
+
+.footer-link-text {
+    display: inline;
+    color:var(--white);
+}

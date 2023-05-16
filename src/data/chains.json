@@ -1,0 +1,134 @@
+{
+    "ethereum": {
+        "chainName": "Ethereum",
+        "chainId": "0x1",
+        "nativeCurrency": {
+            "name": "ETH",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://eth.llamarpc.com",
+            "https://rpc.builder0x69.io",
+            "https://ethereum.publicnode.com",
+            "https://rpc.mevblocker.io",
+            "https://rpc.payload.de"
+        ]
+    },
+    "goerly": {
+        "chainName": "Goerly",
+        "chainId": "0x5",
+        "nativeCurrency": {
+            "name": "ETH",
+            "symbol": "ETH",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://rpc.ankr.com/eth_goerli",
+            "https://eth-goerli.public.blastapi.io",
+            "https://goerli.blockpi.network/v1/rpc/public",
+            "https://endpoints.omniatech.io/v1/eth/goerli/public"
+        ]
+    },
+    "bsc": {
+        "chainName": "BSC",
+        "chainId": "0x38",
+        "nativeCurrency": {
+            "name": "BNB",
+            "symbol": "BNB",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://bsc-dataseed.binance.org",
+            "https://bsc-dataseed1.ninicoin.io",
+            "https://bscrpc.com",
+            "https://bsc-dataseed1.ninicoin.io",
+            "https://bsc-dataseed2.ninicoin.io",
+            "https://bsc-dataseed3.ninicoin.io",
+            "https://bsc-dataseed4.ninicoin.io",
+            "https://bsc-dataseed1.defibit.io",
+            "https://bsc-dataseed2.defibit.io",
+            "https://bsc-dataseed3.defibit.io"
+        ]
+    },
+    "bsc-testnet": {
+        "chainName": "BSC Testnet",
+        "chainId": "0x61",
+        "nativeCurrency": {
+            "name": "tBNB",
+            "symbol": "tBNB",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://data-seed-prebsc-1-s3.binance.org:8545",
+            "https://data-seed-prebsc-2-s3.binance.org:8545",
+            "https://data-seed-prebsc-1-s1.binance.org:8545",
+            "https://data-seed-prebsc-2-s1.binance.org:8545",
+            "https://data-seed-prebsc-1-s2.binance.org:8545",
+            "https://data-seed-prebsc-2-s2.binance.org:8545",
+            "https://bsctestapi.terminet.io/rpc"
+        ]
+    },
+    "polygon": {
+        "chainName": "Polygon",
+        "chainId": "0x89",
+        "nativeCurrency": {
+            "name": "MATIC",
+            "symbol": "MATIC",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://polygon.llamarpc.com",
+            "https://poly-rpc.gateway.pokt.network",
+            "https://rpc-mainnet.matic.quiknode.pro",
+            "https://polygon-rpc.com",
+            "https://matic-mainnet.chainstacklabs.com",
+            "https://poly-rpc.gateway.pokt.network",
+            "https://polygon-bor.publicnode.com"
+        ]
+    },
+    "mumbai": {
+        "chainName": "Mumbai",
+        "chainId": "0x13881",
+        "nativeCurrency": {
+            "name": "MATIC",
+            "symbol": "MATIC",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://rpc.ankr.com/polygon_mumbai",
+            "https://polygon-testnet.public.blastapi.io",
+            "https://matic-mumbai.chainstacklabs.com",
+            "https://rpc-mumbai.maticvigil.com",
+            "https://matic-testnet-archive-rpc.bwarelabs.com",
+            "https://polygontestapi.terminet.io/rpc"
+        ]
+    },
+    "fuse": {
+        "chainName": "Fuse",
+        "chainId": "0x7a",
+        "nativeCurrency": {
+            "name": "FUSE",
+            "symbol": "FUSE",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://fuse-mainnet.chainstacklabs.com",
+            "https://rpc.fuse.io",
+            "https://fuse-rpc.gateway.pokt.network",
+            "https://fuse.api.onfinality.io/public"
+        ]
+    },
+    "sparknet": {
+        "chainName": "Fuse Sparknet",
+        "chainId": "0x7b",
+        "nativeCurrency": {
+            "name": "SPARK",
+            "symbol": "SPARK",
+            "decimals": 18
+        },
+        "rpcUrls": [
+            "https://rpc.fusespark.io"
+        ]
+    }
+}
