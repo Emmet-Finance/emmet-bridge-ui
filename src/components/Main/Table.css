@@ -78,6 +78,10 @@ input[type=number] {
     cursor: pointer;
 }
 
+.group-label {
+    margin: 0 0 10px 5px;
+}
+
 @media screen and (max-width: 550px) {
     .central-frame {
         width: 90%;

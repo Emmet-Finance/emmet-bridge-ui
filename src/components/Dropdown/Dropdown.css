@@ -26,4 +26,13 @@
     flex-direction: column;
     justify-content: flex-start;
     font-weight: 600;
+    min-width: 220px;
+}
+
+.internal-label {
+    margin: 0 0 0 10px;
+}
+
+.image-placeholder{
+    min-width: 30px;
 }

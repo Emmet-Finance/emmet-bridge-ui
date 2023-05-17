@@ -18,6 +18,7 @@ export interface IDropDownItem {
 export interface IDropDownProps extends IDropDownItem {
     label: string
     items?: IDropDownItem[]
+    type:DropdownType
 }
 
 export interface IParentCoords {
@@ -34,4 +35,11 @@ export interface IParentCoords {
 export type EthAccount = {
     ethereum:any,
     account:any
+}
+
+export enum DropdownType {
+    fromChain="from-chain",
+    toChain="to-chain",
+    fromTokens="from-tokens",
+    toTokens="to-tokens"
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './Table.css';
 import Dropdown from '../Dropdown/Dropdown';
-import { IDropDownItem } from '../../types/ui.ts';
+import { DropdownType, IDropDownItem } from '../../types/ui.ts';
 // const mainnetChains = require("../../data/mainnetChains.json");
 import { useDispatch } from 'react-redux';
 import {
@@ -42,13 +42,14 @@ export default function BridgeForm() {
         <form className='central-frame'>
             {/* =================================================== */}
             <div className='internal-frame'>
-                From
+                <span className='group-label'>From</span>
                 <div className='green-frame'>
                     <Dropdown
                         label="Token"
                         name="USDT"
                         imageLink="/crypto/usdt.svg"
                         items={tokens}
+                        type={DropdownType.fromTokens}
                     />
                     <div className='internal-divider'></div>
                     <Dropdown
@@ -56,6 +57,7 @@ export default function BridgeForm() {
                         name="Goerly"
                         imageLink="/crypto/ethereum.svg"
                         items={chains}
+                        type={DropdownType.fromChain}
                     />
                 </div>
             </div>
@@ -65,13 +67,14 @@ export default function BridgeForm() {
             </div>
             {/* =================================================== */}
             <div className='internal-frame'>
-                To
+                <span className='group-label'>To</span>
                 <div className='green-frame'>
                     <Dropdown
                         label="Token"
                         name="USDT"
                         imageLink="/crypto/usdt.svg"
                         items={tokens}
+                        type={DropdownType.toTokens}
                     />
                     <div className='internal-divider'></div>
                     <Dropdown
@@ -79,12 +82,13 @@ export default function BridgeForm() {
                         name="Binance"
                         imageLink="/crypto/bnb.svg"
                         items={chains}
+                        type={DropdownType.toChain}
                     />
                 </div>
             </div>
             {/* =================================================== */}
             <div className='internal-frame'>
-                Amount
+                <span className='group-label'>Amount</span>
                 <div className='green-frame justify-sides'>
                     <div>
                         <input
@@ -100,7 +104,8 @@ export default function BridgeForm() {
             </div>
             {/* =================================================== */}
             <div className='internal-frame'>
-                Balance: {balance
+                <span className='group-label'>Balance:</span>
+                {balance
                     && name
                     && blockchains
                     && roundTwoDigits(balance) + " " + blockchains[name.toLowerCase()].nativeCurrency.symbol}
