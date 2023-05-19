@@ -19,8 +19,9 @@ const Dropdown = (props: IDropDownProps) => {
         y: 0
     } as IParentCoords);
     const [isOpen, setIsOpen] = useState(false);
-    const [name, setName] = useState('')
-    const [imageLink, setImageLink] = useState('')
+    const [name, setName] = useState('');
+    const [imageLink, setImageLink] = useState('');
+    const [listItems, setListItems] = useState([]);
 
     const handleResize = () => {
         if (dropdownRef.current) {
@@ -31,30 +32,49 @@ const Dropdown = (props: IDropDownProps) => {
         }
     }
 
-    const handleUpdateComponent = () => {
-        switch (props.type) {
-            case DropdownType.fromChain:
-                setName(state.fromChain)
-                setImageLink(state.fromChainLogo)
-                break;
-            case DropdownType.toChain:
-                setName(state.toChain)
-                setImageLink(state.toChainLogo)
-                break;
-            case DropdownType.fromTokens:
-                setName(state.fromTokens)
-                setImageLink(state.fromTokensLogo)
-                break;
-            case DropdownType.toTokens:
-                setName(state.toTokens)
-                setImageLink(state.toTokensLogo)
-                break;
-            default:
-                break;
-        }
+    /**
+     * Removes a banned item from the list
+     * @param filterItem the item to exclude
+     * @param items the item list
+     * @returns filtered item list
+     */
+    const filterOther = (filterItem: string, items: IDropDownItem[]) => {
+        return items.filter(item => item.name !== filterItem)
     }
 
     useEffect(() => {
+
+        const handleUpdateComponent = () => {
+            switch (props.type) {
+                case DropdownType.fromChain:
+                    setName(state.fromChain)
+                    setImageLink(state.fromChainLogo)
+                    if(props.items){
+                        //@ts-ignore
+                        setListItems(filterOther(state.toChain, props.items))
+                    }
+                    
+                    break;
+                case DropdownType.toChain:
+                    setName(state.toChain)
+                    setImageLink(state.toChainLogo)
+                    if(props.items){
+                        //@ts-ignore
+                        setListItems(filterOther(state.fromChain, props.items))
+                    }
+                    break;
+                case DropdownType.fromTokens:
+                    setName(state.fromTokens)
+                    setImageLink(state.fromTokensLogo)
+                    break;
+                case DropdownType.toTokens:
+                    setName(state.toTokens)
+                    setImageLink(state.toTokensLogo)
+                    break;
+                default:
+                    break;
+            }
+        }
         // Check whether chains or tokens changed
         handleUpdateComponent()
 
@@ -69,7 +89,7 @@ const Dropdown = (props: IDropDownProps) => {
             window.removeEventListener('resize', handleResize)
         }
 
-    }, [dropdownRef, state]);
+    }, [dropdownRef, state, props.type]);
 
     const onDropboxClick = (event: any) => {
         event.stopPropagation();
@@ -84,7 +104,7 @@ const Dropdown = (props: IDropDownProps) => {
             <span className='internal-label'>
                 {props.label}
             </span>
-            
+
             <div
                 className='dropdown-box'
                 onClick={(e) => onDropboxClick(e)}
@@ -103,7 +123,7 @@ const Dropdown = (props: IDropDownProps) => {
                     <i className="fa fa-caret-down"></i>
                 </div>
                 <DropdownList
-                    items={props.items as IDropDownItem[]}
+                    items={listItems as IDropDownItem[]}
                     visible={isOpen}
                     parentCoords={dropdownCoordinates}
                     type={props.type}

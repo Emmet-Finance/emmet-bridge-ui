@@ -2,11 +2,10 @@ import { ethers } from 'ethers'
 
 /**
  * Creates a Web3Provider
- * @param window: window & & globalThis
  * @returns a Web3Provider
  */
-export const getEvmProvider = (window: any): ethers.providers.Web3Provider => {
-    return new ethers.providers.Web3Provider(window.ethereum);
+export const getEvmProvider = (): ethers.providers.Web3Provider => {
+    return new ethers.providers.Web3Provider((window as any).ethereum);
 }
 
 /**
@@ -15,8 +14,8 @@ export const getEvmProvider = (window: any): ethers.providers.Web3Provider => {
  * @param account an EVM account
  * @returns balance of the account in native coins
  */
-export const getNativeCoinBalance = async (window: any, account: string) => {
-    return await getEvmProvider(window).getBalance(account);
+export const getNativeCoinBalance = async (account: string) => {
+    return await getEvmProvider().getBalance(account);
 }
 
 /**

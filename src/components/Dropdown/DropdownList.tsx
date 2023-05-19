@@ -15,7 +15,7 @@ import {
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../data/store.ts'
 import { TChangeMMChain } from '../../types/blockchain.ts'
-import { hasCookies, readCookieByKey } from '../../utils/ui.ts'
+import { hasCookies, readCookieByKey } from '../../utils/cookies.ts'
 const chains = require('../../data/chains.json')
 
 const DropdownList = (props: {
@@ -54,10 +54,14 @@ const DropdownList = (props: {
                 dispatch(setToChain(item.name))
                 break;
             case DropdownType.fromTokens:
+                // Currently only support the same token
                 dispatch(setFromTokens(item.name))
+                dispatch(setToTokens(item.name))
                 break;
             case DropdownType.toTokens:
+                // Currently only support the same token
                 dispatch(setToTokens(item.name))
+                dispatch(setFromTokens(item.name))
                 break;
             default:
                 break;

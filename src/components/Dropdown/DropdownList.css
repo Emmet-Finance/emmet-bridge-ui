@@ -18,5 +18,6 @@
 }
 
 .dropdown-element:hover{
-    background-color: var(--gray-200);
+    background-color: var(--emmet-green);
+    color:var(--white)
 }

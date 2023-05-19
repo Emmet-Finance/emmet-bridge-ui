@@ -1,4 +1,4 @@
-import { CurrentChain, IDropDownItem, TCookie } from "../types/ui.ts";
+import { CurrentChain, IDropDownItem } from "../types/ui.ts";
 const chains = require('../data/chainIds.json');
 const tokens = require('../data/tokens.json')
 const chainIds = require('../data/chainIds.json')
@@ -22,11 +22,16 @@ export const chainIdToChainName = (chainId: number | string): CurrentChain => {
             chainId
         }
     }
-
 }
 
+/**
+ * Finds the logo by the chain name
+ * @param name chain name
+ * @returns the link to the chain logo
+ */
 export const chainNameToLogo = (name: string): string => {
     let link = ''
+    // eslint-disable-next-line array-callback-return
     combinedChains.map((chain: IDropDownItem): void => {
         if (name === chain.name) {
             link = chain.imageLink
@@ -35,89 +40,37 @@ export const chainNameToLogo = (name: string): string => {
     return link
 }
 
+/**
+ * Finds the chain logo by chainId
+ * @param chainId lookup ID
+ * @returns the link to the chain logo
+ */
 export const chainIdToChainLogo = (chainId: any) => {
     return chains[chainId.toString()].icon;
 }
 
-export const roundTwoDigits = (num: number) => {
-    return parseFloat(num.toString()).toFixed(2);
+/**
+ * Rounds a number to n digits after zero 0.00
+ * @param num number to be rounded
+ * @param digits decimals after period .00
+ * @returns a rounded number
+ */
+export const roundTwoDigits = (num: number, digits:number) => {
+    return parseFloat(num.toString()).toFixed(digits);
 }
 
+/**
+ * Finds the token logo by its name 
+ * @param name token name
+ * @returns the link to the token logo
+ */
 export const tokenNameToLogo = (name: string): string => {
     let logo: string = ''
+    // eslint-disable-next-line array-callback-return
     tokens.map((token: IDropDownItem) => {
         if (token.name === name) {
             logo = token.imageLink
         }
     });
     return logo;
-}
-
-/**
- *  C O O K I E S
- */
-
-export const hasCookies = ():boolean => {
-    return document.cookie.length > 0;
-}
-
-/**
- * Checks whether a key exists in a cookie
- * @param key the checked key
- * @returns true | false
- */
-export const cookieHasKey = (key: string): boolean => {
-    if ( document
-        .cookie
-        .split(';')
-        .some(item => item.trim()
-            .startsWith(`${key}=`))) {
-        return true;
-    } else { return false; }
-}
-
-/**
- * Reads a cookie by key
- * @param key the lookup key
- * @returns the value or ''
- */
-export const readCookieByKey = (key: string): string => {
-    if (hasCookies() && cookieHasKey(key)) {
-        return document
-            .cookie
-            .split(';')
-            .find(item => {
-                return item.trim()
-                    .startsWith(`${key}=`)
-            })?.split('=')[1] as string;
-    } else { return ''; }
-}
-
-/**
- * Adds or updates a cookie
- * @param newCookie \{key,value,days?,hours?,minutes?,seconds?}
- */
-export const addCookie = (newCookie: TCookie) => {
-    let expire = new Date();
-    if (newCookie.days) { expire.setDate(expire.getDate() + newCookie.days) }
-    if (newCookie.hours) { expire.setHours(expire.getHours() + newCookie.hours) }
-    if (newCookie.minutes) { expire.setMinutes(expire.getMinutes() + newCookie.minutes) }
-    if (newCookie.seconds) { expire.setSeconds(expire.getSeconds() + newCookie.seconds) }
-    document.cookie = `${newCookie.key}=${newCookie.value};domain=${window.location.hostname};path=/;expires=${expire};`
-}
-
-/**
- * Delets a cookie by key
- * @param key the lookup key
- */
-export const deleteCookie = (key: string) => {
-    if (hasCookies() && cookieHasKey(key)){
-        const toDelete: TCookie = {
-            key,
-            value: '',
-            seconds: 1
-        }
-        addCookie(toDelete)
-
-    }
 }

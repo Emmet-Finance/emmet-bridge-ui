@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { addCookie, chainNameToLogo, tokenNameToLogo } from "../utils/ui.ts";
+import { chainNameToLogo, tokenNameToLogo } from "../utils/ui.ts";
 import { TChangeMMChain } from '../types/blockchain.ts';
+import { addCookie } from '../utils/cookies.ts';
 
 /**
  * Switches Metamask to another chain
@@ -24,7 +25,6 @@ export const changeMetamaskAccount = createAsyncThunk('change-metamask-account',
                     params:[params.newChain]
                 })
             }
-            
         }
         return params.newChain
     }

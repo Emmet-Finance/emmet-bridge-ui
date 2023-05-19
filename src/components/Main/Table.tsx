@@ -2,24 +2,45 @@ import React from 'react';
 import './Table.css';
 import Dropdown from '../Dropdown/Dropdown';
 import { DropdownType, IDropDownItem } from '../../types/ui.ts';
-import {useAppSelector} from '../../data/store.ts'
+import { AppDispatch, useAppSelector } from '../../data/store.ts'
 import { roundTwoDigits } from '../../utils/ui.ts';
+import { useDispatch } from 'react-redux';
+import { changeMetamaskAccount, setFromChain, setToChain } from '../../data/bridgeSlice.ts';
+import { TChangeMMChain } from '../../types/blockchain.ts';
 const blockchains = require("../../data/chains.json");
 const tokens = require("../../data/tokens.json");
 const testnetChains = require("../../data/testnetChains.json");
+const allChains = require('../../data/chains.json')
 
 export default function BridgeForm() {
 
-    const state = useAppSelector((state: any) => state.metamask);
+    const dispatch = useDispatch();
+    const asyncDispatch = useDispatch<AppDispatch>();
+
+    const metamaskState = useAppSelector((state: any) => state.metamask);
+    const bridgeState = useAppSelector((state: any) => state.bridge);
     const {
         balance,
         name,
-    } = state;
+    } = metamaskState;
 
     let chains: IDropDownItem[];
 
     chains = testnetChains as IDropDownItem[];
-    
+
+    const swapToFromChains = () => {
+
+        const { fromChain, toChain } = bridgeState;
+
+        dispatch(setToChain(fromChain))
+        dispatch(setFromChain(toChain))
+        const mmAccount: TChangeMMChain = {
+            ethereum: (window as any).ethereum,
+            newChain: allChains[toChain.toLowerCase()]
+        }
+        asyncDispatch(changeMetamaskAccount(mmAccount))
+    }
+
     return (
         <form className='central-frame'>
             {/* =================================================== */}
@@ -44,7 +65,7 @@ export default function BridgeForm() {
                 </div>
             </div>
             {/* =================================================== */}
-            <div className='internal-frame align-center'>
+            <div className='internal-frame align-center' onClick={swapToFromChains}>
                 <img src="./crypto/swap.svg" alt="Swap" width="40px" />
             </div>
             {/* =================================================== */}
@@ -72,13 +93,13 @@ export default function BridgeForm() {
             <div className='internal-frame'>
                 <span className='group-label'>Amount</span>
                 <div className='green-frame justify-sides'>
-                        <input
-                            type="number"
-                            name="amount"
-                            id="amount"
-                            className='amount-input'
-                            placeholder='Transfer amount...'
-                        />
+                    <input
+                        type="number"
+                        name="amount"
+                        id="amount"
+                        className='amount-input'
+                        placeholder='Transfer amount...'
+                    />
                     <button className='max-button'>MAX</button>
                 </div>
             </div>
@@ -88,7 +109,7 @@ export default function BridgeForm() {
                 {balance
                     && name
                     && blockchains
-                    && roundTwoDigits(balance) + " " + blockchains[name.toLowerCase()].nativeCurrency.symbol}
+                    && roundTwoDigits(balance, 2) + " " + blockchains[name.toLowerCase()].nativeCurrency.symbol}
             </div>
             {/* =================================================== */}
         </form>
