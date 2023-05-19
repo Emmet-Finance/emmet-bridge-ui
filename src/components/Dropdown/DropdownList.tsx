@@ -36,7 +36,7 @@ const DropdownList = (props: {
     useEffect(() => {
         setTop(props.parentCoords.bottom)
         setLeft(props.parentCoords.left)
-        setWidth(props.parentCoords.width)
+        setWidth(props.parentCoords.width-20)
 
     }, [props.parentCoords]);
 

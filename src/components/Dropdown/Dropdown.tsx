@@ -103,7 +103,6 @@ const Dropdown = (props: IDropDownProps) => {
     return (
         <div
             className='internal-box'
-            ref={dropdownRef}
         >
             <span className='internal-label'>
                 {props.label}
@@ -111,6 +110,7 @@ const Dropdown = (props: IDropDownProps) => {
 
             <div
                 className='dropdown-box'
+                ref={dropdownRef}
                 onClick={(e) => onDropboxClick(e)}
             >
                 {imageLink && imageLink.length > 0

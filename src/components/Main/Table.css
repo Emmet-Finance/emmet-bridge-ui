@@ -17,7 +17,7 @@
     margin: 10px;
 }
 
-.green-frame{
+.green-frame, .amount-green-box{
     border: solid 2px;
     border-color: var(--emmet-green);
     border-radius: 10px;
@@ -43,6 +43,7 @@
     border: solid 2px;
     border-radius: 2px;
     border-color: var(--gray-500);
+    margin: 0 5px 0 5px;
 }
 
 /* Chrome, Safari, Edge, Opera */
@@ -61,7 +62,7 @@ input[type=number] {
 .amount-input {
     margin: 10px;
     width: 100%;
-    font-size: 1.5em !important;
+    font-size: 1em !important;
     font-weight: 600;
     color: var(--gray-600);
     border: 0;
@@ -100,5 +101,11 @@ input[type=number] {
     .green-frame{
         flex-direction:column-reverse;
         font-size: 1em;
+    }
+    .amount-input{
+        width:95%;
+    }
+    .internal-divider{
+        margin: 5px 0 5px 0;
     }
 }

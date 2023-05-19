@@ -27,3 +27,12 @@ footer {
     display: inline;
     color:var(--white);
 }
+
+@media screen and (max-width: 550px) {
+    footer {
+        flex-direction: column;
+        height: 200px;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -17,9 +17,7 @@ const Header = () => {
     const state = useAppSelector((state: any) => state.metamask);
     const {
         account,
-        chainId,
         isTestnet,
-        name,
     } = state;
 
     const connectWallet = async () => {
@@ -52,13 +50,6 @@ const Header = () => {
                     Testnet
                 </span>)
                 : ''}
-
-            <span className='chain-name'>
-                {metamask && chainId
-                    ? (<span >Connected to {name}</span>)
-                    : "Not connected"
-                }
-            </span>
             {metamask
                 ? (metamask
                     ? (<button className='wallet-button' onClick={() => copyAddressToClipboard(account)}>

@@ -4,20 +4,26 @@
     justify-content:space-between;
     align-items: center;
     cursor: pointer;
+    border: solid 1px;
+    border-radius: 10px;
+    border-color: var(--gray-200);
+    font-size: 0.7em;
 }
 
 .dropdown-image{
     height:30px;
     width:30px;
-    margin:5px 20px 5px 10px;
+    margin:5px 10px 5px 10px;
 }
 
 .dropdown-text{
     font-size: 2em;
+    min-width: 110px;
+    text-align: center;
 }
 
 .dropdown-caret-down{
-    margin: 5px 10px 5px 20px;
+    margin: 5px 15px 5px 15px;
     font-size: 2em;
 }
 

@@ -49,3 +49,12 @@ header {
     margin: 10px;
     margin-right: 0;
 }
+
+@media screen and (max-width: 550px) {
+    header {
+        flex-direction: column;
+        height: 200px;
+        justify-content: center;
+        align-items: center;
+    }
+}

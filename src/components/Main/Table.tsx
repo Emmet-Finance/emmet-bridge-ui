@@ -98,7 +98,7 @@ export default function BridgeForm() {
             {/* =================================================== */}
             <div className='internal-frame'>
                 <span className='group-label'>Amount</span>
-                <div className='green-frame justify-sides'>
+                <div className='amount-green-box justify-sides'>
                     <input
                         type="number"
                         name="amount"
