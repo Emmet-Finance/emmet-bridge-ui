@@ -66,10 +66,14 @@ const Dropdown = (props: IDropDownProps) => {
                 case DropdownType.fromTokens:
                     setName(state.fromTokens)
                     setImageLink(state.fromTokensLogo)
+                    //@ts-ignore
+                    setListItems(props.items)
                     break;
                 case DropdownType.toTokens:
                     setName(state.toTokens)
                     setImageLink(state.toTokensLogo)
+                    //@ts-ignore
+                    setListItems(props.items)
                     break;
                 default:
                     break;
@@ -89,7 +93,7 @@ const Dropdown = (props: IDropDownProps) => {
             window.removeEventListener('resize', handleResize)
         }
 
-    }, [dropdownRef, state, props.type]);
+    }, [dropdownRef, state, props.type, props.items]);
 
     const onDropboxClick = (event: any) => {
         event.stopPropagation();

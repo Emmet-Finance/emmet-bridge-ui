@@ -65,8 +65,14 @@ export default function BridgeForm() {
                 </div>
             </div>
             {/* =================================================== */}
-            <div className='internal-frame align-center' onClick={swapToFromChains}>
-                <img src="./crypto/swap.svg" alt="Swap" width="40px" />
+            <div className='internal-frame align-center'>
+                <img
+                    src="./crypto/swap.svg"
+                    alt="Swap"
+                    width="40px"
+                    className='swap-image'
+                    onClick={swapToFromChains}
+                />
             </div>
             {/* =================================================== */}
             <div className='internal-frame'>
