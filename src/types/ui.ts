@@ -43,3 +43,12 @@ export enum DropdownType {
     fromTokens="from-tokens",
     toTokens="to-tokens"
 }
+
+export type TCookie = {
+    key:string,
+    value:string,
+    days?:number,
+    hours?:number,
+    minutes?:number,
+    seconds?:number
+}

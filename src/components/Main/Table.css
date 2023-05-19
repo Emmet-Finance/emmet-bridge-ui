@@ -45,15 +45,6 @@
     border-color: var(--gray-500);
 }
 
-.amount-input {
-    margin: 10px;
-    width: 80%;
-    font: 1em sans-serif;
-    color: var(--gray-900);
-    border: 0;
-    outline: none;
-}
-
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -65,6 +56,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+.amount-input {
+    margin: 10px;
+    width: 100%;
+    font-size: 1.5em !important;
+    font-weight: 600;
+    color: var(--gray-600);
+    border: 0;
+    outline: none;
+}
+
+.amount-input::placeholder{
+    color: var(--gray-400);
+    font-weight: 500;
 }
 
 .justify-sides{

@@ -51,8 +51,8 @@
             "https://bsc-dataseed3.defibit.io"
         ]
     },
-    "bsc-testnet": {
-        "chainName": "BSC Testnet",
+    "tbsc": {
+        "chainName": "tBSC",
         "chainId": "0x61",
         "nativeCurrency": {
             "name": "tBNB",
@@ -120,7 +120,7 @@
         ]
     },
     "sparknet": {
-        "chainName": "Fuse Sparknet",
+        "chainName": "Sparknet",
         "chainId": "0x7b",
         "nativeCurrency": {
             "name": "SPARK",

@@ -5,7 +5,7 @@
         "imageLink":"/crypto/ethereum.svg"
     },
     {
-        "name":"Binance",
+        "name":"tBSC",
         "chainId":"0x61",
         "imageLink":"/crypto/bnb.svg"
     },
@@ -15,8 +15,8 @@
         "imageLink":"/crypto/matic.svg"
     },
     {
-        "name":"Fuse",
-        "chainId":"0x7B",
+        "name":"Sparknet",
+        "chainId":"0x7b",
         "imageLink":"/crypto/fuse.svg"
     }
 ]

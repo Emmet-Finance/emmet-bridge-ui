@@ -12,37 +12,27 @@ import './Header.css';
 import React, { useEffect } from 'react';
 // import { getEvmProvider } from '../../utils/read.ts';
 import { copyAddressToClipboard} from '../../utils/metamask.ts';
+import { setFromChain } from '../../data/bridgeSlice.ts';
+import { chainIdToChainName } from '../../utils/ui.ts';
 
 const Header = () => {
 
     // Setup
     const dispatch = useDispatch<AppDispatch>();
     const state = useAppSelector((state:any) => state.metamask);
-    // const provider = getEvmProvider(window);
     const ethereum = (window as any ).ethereum;
     const {
         account, 
-        // accounts, 
-        // balance, 
         chainId, 
         hasMetamask, 
         isConnected,
         isTestnet,
         name,
-        pending,
-        error
     } = state;
 
     useEffect(() => {
         dispatch(isMetamaskAvailabile(ethereum))
     }, [dispatch, ethereum]);
-
-    // console.log("hasMetamask:", hasMetamask);
-    // console.log("isConnected:", isConnected)
-    // console.log("chainId:", chainId.toString());
-    // console.log("Account:", account);
-    // console.log("Pending", pending);
-    // if(error) console.error("Error:", error);
 
     const connectWallet = async () => {
         try {
@@ -50,7 +40,6 @@ const Header = () => {
                 dispatch(getEvmAccounts(ethereum));
                 dispatch(getCurrentChainId(ethereum));
                 dispatch(getEvmAccounts(ethereum));
-                
             }
 
         } catch (error) {

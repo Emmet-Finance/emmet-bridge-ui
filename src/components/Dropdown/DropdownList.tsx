@@ -9,9 +9,14 @@ import {
     setFromChain, 
     setToChain,
     setFromTokens,
-    setToTokens
+    setToTokens,
+    changeMetamaskAccount
 } from '../../data/bridgeSlice.ts'
 import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../../data/store.ts'
+import { TChangeMMChain } from '../../types/blockchain.ts'
+import { hasCookies, readCookieByKey } from '../../utils/ui.ts'
+const chains = require('../../data/chains.json')
 
 const DropdownList = (props: {
     items: IDropDownItem[],
@@ -25,6 +30,7 @@ const DropdownList = (props: {
     const [width, setWidth] = useState(0);
 
     const dispatch = useDispatch();
+    const asyncDispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
         setTop(props.parentCoords.bottom)
@@ -35,10 +41,14 @@ const DropdownList = (props: {
 
     const onListItemClick = (item: IDropDownItem) => {
         // Change the global state
-        console.log(item);
         switch (props.type) {
             case DropdownType.fromChain:
                 dispatch(setFromChain(item.name))
+                const mmAccount: TChangeMMChain = {
+                    ethereum:(window as any).ethereum,
+                    newChain:chains[item.name.toLowerCase()]
+                    }
+                asyncDispatch(changeMetamaskAccount(mmAccount))
                 break;
             case DropdownType.toChain:
                 dispatch(setToChain(item.name))
@@ -52,8 +62,24 @@ const DropdownList = (props: {
             default:
                 break;
         }
-
     }
+
+    window.addEventListener("load", (event) => {
+        if(hasCookies()){
+            // FROM CHAIN
+            const fromChain = readCookieByKey('fromChain');
+            dispatch(setFromChain(fromChain))
+            // TO CHAIN
+            const toChain = readCookieByKey('toChain');
+            dispatch(setToChain(toChain))
+            // FROM TOKENS
+            const fromTokens = readCookieByKey('fromTokens');
+            dispatch(setFromTokens(fromTokens))
+            // TO TOKENS
+            const toTokens = readCookieByKey('toTokens');
+            dispatch(setToTokens(toTokens))
+        }
+    });
 
     return (
         <div>

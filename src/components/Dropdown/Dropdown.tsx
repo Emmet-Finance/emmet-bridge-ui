@@ -57,7 +57,6 @@ const Dropdown = (props: IDropDownProps) => {
     useEffect(() => {
         // Check whether chains or tokens changed
         handleUpdateComponent()
-        console.log(state)
 
         // Check coordinates before first resize
         handleResize()

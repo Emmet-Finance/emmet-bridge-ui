@@ -2,12 +2,7 @@ import React from 'react';
 import './Table.css';
 import Dropdown from '../Dropdown/Dropdown';
 import { DropdownType, IDropDownItem } from '../../types/ui.ts';
-// const mainnetChains = require("../../data/mainnetChains.json");
-import { useDispatch } from 'react-redux';
-import {
-    AppDispatch,
-    useAppSelector,
-} from '../../data/store.ts'
+import {useAppSelector} from '../../data/store.ts'
 import { roundTwoDigits } from '../../utils/ui.ts';
 const blockchains = require("../../data/chains.json");
 const tokens = require("../../data/tokens.json");
@@ -15,29 +10,16 @@ const testnetChains = require("../../data/testnetChains.json");
 
 export default function BridgeForm() {
 
-    // Setup
-    const dispatch = useDispatch<AppDispatch>();
     const state = useAppSelector((state: any) => state.metamask);
-    // const provider = getEvmProvider(window);
-    const ethereum = (window as any).ethereum;
     const {
-        account,
         balance,
-        chainId,
-        hasMetamask,
-        isConnected,
-        isTestnet,
         name,
-        pending,
-        error
     } = state;
-
-    console.log("Table state:", state)
 
     let chains: IDropDownItem[];
 
     chains = testnetChains as IDropDownItem[];
-
+    
     return (
         <form className='central-frame'>
             {/* =================================================== */}
@@ -90,7 +72,6 @@ export default function BridgeForm() {
             <div className='internal-frame'>
                 <span className='group-label'>Amount</span>
                 <div className='green-frame justify-sides'>
-                    <div>
                         <input
                             type="number"
                             name="amount"
@@ -98,7 +79,6 @@ export default function BridgeForm() {
                             className='amount-input'
                             placeholder='Transfer amount...'
                         />
-                    </div>
                     <button className='max-button'>MAX</button>
                 </div>
             </div>

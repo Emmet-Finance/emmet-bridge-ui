@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { chainIdToChainName } from '../utils/ui.ts'
-import { EthAccount } from '../types/ui.ts';
 import { ethers } from 'ethers';
 
 /**
@@ -43,6 +42,7 @@ export const getEvmAccounts = createAsyncThunk('get-metamask-accounts', async (e
     })
     return {accounts, balance};
 });
+
 
 export const metamaskSlice = createSlice({
     name: "metamask",
