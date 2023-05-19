@@ -18,8 +18,8 @@ export const handleAccountsChanged = (accounts: any[]) => {
  * Copies some text to clipboard
  * @param data a string to be copied to clipboard
  */
-export const copyAddressToClipboard = () => {
-    navigator.clipboard.writeText(currentAccount);
+export const copyAddressToClipboard = (account:string) => {
+    navigator.clipboard.writeText(account);
 }
 
 /**

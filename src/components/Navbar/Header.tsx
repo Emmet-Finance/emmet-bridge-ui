@@ -14,6 +14,7 @@ import React, { useEffect } from 'react';
 import { copyAddressToClipboard} from '../../utils/metamask.ts';
 import { setFromChain } from '../../data/bridgeSlice.ts';
 import { chainIdToChainName } from '../../utils/ui.ts';
+import { hasCookies } from '../../utils/cookies.ts';
 
 const Header = () => {
 
@@ -47,6 +48,10 @@ const Header = () => {
         }
     }
 
+    window.addEventListener("load", (event) => {
+        connectWallet()
+    });
+
     return (
         <header className='justify-content-between'>
             <img className='emmet-logo' src="Frame-18.png" alt="Emmet Logo" />
@@ -64,7 +69,7 @@ const Header = () => {
             </span>
             {hasMetamask
                 ? (isConnected
-                    ? (<button className='wallet-button' onClick={copyAddressToClipboard}>
+                    ? (<button className='wallet-button' onClick={() => copyAddressToClipboard(account)}>
                         <p>
                             {account.slice(0, 4)}...
                             {account.slice(38, 42)}
