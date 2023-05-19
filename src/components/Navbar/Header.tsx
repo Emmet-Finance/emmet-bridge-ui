@@ -1,46 +1,33 @@
 import { useDispatch } from 'react-redux';
-import { 
-    isMetamaskAvailabile, 
-    getCurrentChainId, 
+import {
+    getCurrentChainId,
     getEvmAccounts,
 } from '../../data/metamaskSlice.ts';
-import { 
-    AppDispatch, 
+import {
+    AppDispatch,
     useAppSelector,
 } from '../../data/store.ts'
 import './Header.css';
-import React, { useEffect } from 'react';
-// import { getEvmProvider } from '../../utils/read.ts';
-import { copyAddressToClipboard} from '../../utils/metamask.ts';
-import { setFromChain } from '../../data/bridgeSlice.ts';
-import { chainIdToChainName } from '../../utils/ui.ts';
-import { hasCookies } from '../../utils/cookies.ts';
+import { copyAddressToClipboard, metamask } from '../../utils/metamask.ts';
 
 const Header = () => {
 
     // Setup
     const dispatch = useDispatch<AppDispatch>();
-    const state = useAppSelector((state:any) => state.metamask);
-    const ethereum = (window as any ).ethereum;
+    const state = useAppSelector((state: any) => state.metamask);
     const {
-        account, 
-        chainId, 
-        hasMetamask, 
-        isConnected,
+        account,
+        chainId,
         isTestnet,
         name,
     } = state;
 
-    useEffect(() => {
-        dispatch(isMetamaskAvailabile(ethereum))
-    }, [dispatch, ethereum]);
-
     const connectWallet = async () => {
         try {
-            if (hasMetamask) {
-                dispatch(getEvmAccounts(ethereum));
-                dispatch(getCurrentChainId(ethereum));
-                dispatch(getEvmAccounts(ethereum));
+            if (metamask) {
+                dispatch(getEvmAccounts());
+                dispatch(getCurrentChainId());
+                dispatch(getEvmAccounts());
             }
 
         } catch (error) {
@@ -49,26 +36,31 @@ const Header = () => {
     }
 
     window.addEventListener("load", (event) => {
-        connectWallet()
+        connectWallet();
+    });
+
+    metamask.on('chainChanged', () => {
+        connectWallet();
+        window.location.reload();
     });
 
     return (
         <header className='justify-content-between'>
             <img className='emmet-logo' src="Frame-18.png" alt="Emmet Logo" />
-            {isConnected && isTestnet
+            {metamask && isTestnet
                 ? (<span className='testnet-label'>
                     Testnet
                 </span>)
                 : ''}
 
             <span className='chain-name'>
-                {isConnected && chainId
+                {metamask && chainId
                     ? (<span >Connected to {name}</span>)
                     : "Not connected"
                 }
             </span>
-            {hasMetamask
-                ? (isConnected
+            {metamask
+                ? (metamask
                     ? (<button className='wallet-button' onClick={() => copyAddressToClipboard(account)}>
                         <p>
                             {account.slice(0, 4)}...

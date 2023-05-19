@@ -16,6 +16,7 @@ import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../data/store.ts'
 import { TChangeMMChain } from '../../types/blockchain.ts'
 import { hasCookies, readCookieByKey } from '../../utils/cookies.ts'
+import { metamask} from '../../utils/metamask.ts'
 const chains = require('../../data/chains.json')
 
 const DropdownList = (props: {
@@ -68,7 +69,7 @@ const DropdownList = (props: {
         }
     }
 
-    window.addEventListener("load", (event) => {
+    const onWindowReload = () => {
         if(hasCookies()){
             // FROM CHAIN
             const fromChain = readCookieByKey('fromChain');
@@ -83,7 +84,16 @@ const DropdownList = (props: {
             const toTokens = readCookieByKey('toTokens');
             dispatch(setToTokens(toTokens))
         }
+    }
+
+    window.addEventListener("load", (event) => {
+        onWindowReload()
     });
+
+    metamask.on('chainChanged', () => {
+        onWindowReload()
+        window.location.reload();
+    })
 
     return (
         <div>

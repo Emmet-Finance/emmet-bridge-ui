@@ -1,5 +1,6 @@
 export let currentAccount: any = null;
 export let chainId: any = null;
+export const metamask = (window as any).ethereum;
 
 /** V
  * Sets the currentAccount to accounts[0]
@@ -21,12 +22,3 @@ export const handleAccountsChanged = (accounts: any[]) => {
 export const copyAddressToClipboard = (account:string) => {
     navigator.clipboard.writeText(account);
 }
-
-/**
- * Reloads the window on change of chain
- */
-export const handleChainChanged = () => {
-    window.location.reload();
-}
-
-(window as any).ethereum.on('chainChanged', handleChainChanged);
