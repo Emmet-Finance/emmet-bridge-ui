@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { chainIdToChainName, chainNameToLogo } from '../utils/ui.ts'
 import { ethers } from 'ethers';
 import { metamask } from '../utils/metamask.ts'
 import { addCookie } from '../utils/cookies.ts';
+import { ChainIdToName, TestnetNames, ChainLogos } from './consts.ts';
 
 /**
  * Checks whether Metamask is installed
@@ -50,7 +50,6 @@ export const metamaskSlice = createSlice({
         hasMetamask: false,
         isConnected: false,
         isTestnet: false,
-        name: '',
         pending: false,
     },
     reducers: {
@@ -74,15 +73,16 @@ export const metamaskSlice = createSlice({
             // CHAIN ID INJECTION
             .addCase(getCurrentChainId.fulfilled, (state: any, action) => {
                 state.chainId = action.payload
+                //@ts-ignore
+                const chainName:string = ChainIdToName[state.chainId.toString()]
+                state.fromChain = chainName;
+                //@ts-ignore
+                state.fromChainLogo = ChainLogos[chainName];
+                state.isTestnet =  TestnetNames.includes(chainName);
+                state.isConnected = true
                 state.error = ''
                 state.pending = false
-                const { name, isTestnet } = chainIdToChainName(state.chainId.toString())
-                state.name = name
-                state.fromChain = name;
-                state.fromChainLogo = chainNameToLogo(name);
-                addCookie({key:"fromChain", value:name, ...state.cookieExpires});
-                state.isTestnet = isTestnet
-                state.isConnected = true
+                addCookie({key:"fromChain", value:chainName, ...state.cookieExpires});
             })
             .addCase(getCurrentChainId.pending, (state: any) => {
                 state.chainId = 0

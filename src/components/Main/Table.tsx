@@ -7,10 +7,8 @@ import { roundTwoDigits } from '../../utils/ui.ts';
 import { useDispatch } from 'react-redux';
 import { changeMetamaskAccount, setFromChain, setToChain } from '../../data/bridgeSlice.ts';
 import { TChangeMMChain } from '../../types/blockchain.ts';
-const blockchains = require("../../data/chains.json");
-const tokens = require("../../data/tokens.json");
+import { CHAINS, SupportedTokens } from '../../data/consts.ts';
 const testnetChains = require("../../data/testnetChains.json");
-const allChains = require('../../data/chains.json')
 
 export default function BridgeForm() {
 
@@ -19,10 +17,8 @@ export default function BridgeForm() {
 
     const metamaskState = useAppSelector((state: any) => state.metamask);
     const bridgeState = useAppSelector((state: any) => state.bridge);
-    const {
-        balance,
-        name,
-    } = metamaskState;
+    const {balance} = metamaskState;
+    const { fromChain, toChain, fromTokens, tokenBalance } = bridgeState;
 
     let chains: IDropDownItem[];
 
@@ -30,13 +26,11 @@ export default function BridgeForm() {
 
     const swapToFromChains = () => {
 
-        const { fromChain, toChain } = bridgeState;
-
         dispatch(setToChain(fromChain))
         dispatch(setFromChain(toChain))
         const mmAccount: TChangeMMChain = {
             ethereum: (window as any).ethereum,
-            newChain: allChains[toChain.toLowerCase()]
+            newChain: CHAINS[toChain.toLowerCase()]
         }
         asyncDispatch(changeMetamaskAccount(mmAccount))
     }
@@ -51,7 +45,7 @@ export default function BridgeForm() {
                         label="Token"
                         name="USDT"
                         imageLink="/crypto/usdt.svg"
-                        items={tokens}
+                        items={SupportedTokens}
                         type={DropdownType.fromTokens}
                     />
                     <div className='internal-divider'></div>
@@ -82,7 +76,7 @@ export default function BridgeForm() {
                         label="Token"
                         name="USDT"
                         imageLink="/crypto/usdt.svg"
-                        items={tokens}
+                        items={SupportedTokens}
                         type={DropdownType.toTokens}
                     />
                     <div className='internal-divider'></div>
@@ -111,11 +105,19 @@ export default function BridgeForm() {
             </div>
             {/* =================================================== */}
             <div className='internal-frame'>
-                <span className='group-label'>Balance:</span>
+                <span className='group-label'>Balance: </span>
                 {balance
-                    && name
-                    && blockchains
-                    && roundTwoDigits(balance, 2) + " " + blockchains[name.toLowerCase()].nativeCurrency.symbol}
+                    && fromChain
+                    && CHAINS
+                    && roundTwoDigits(balance, 2) + " " + CHAINS[fromChain.toLowerCase()].nativeCurrency.symbol}
+            </div>
+            {/* =================================================== */}
+            <div className='internal-frame'>
+                <span className='group-label'>Available: </span>
+                {balance
+                    && fromTokens
+                    && tokenBalance
+                    && roundTwoDigits(tokenBalance, 2) + " " + fromTokens}
             </div>
             {/* =================================================== */}
         </form>

@@ -2,21 +2,29 @@
     {
         "name":"Goerly",
         "chainId":"0x5",
-        "imageLink":"/crypto/ethereum.svg"
+        "imageLink":"/crypto/ethereum.svg",
+        "explorer":"https://goerli.etherscan.io/",
+        "faucet":"https://goerli-faucet.pk910.de/"
     },
     {
         "name":"tBSC",
         "chainId":"0x61",
-        "imageLink":"/crypto/bnb.svg"
+        "imageLink":"/crypto/bnb.svg",
+        "explorer":"https://testnet.bscscan.com/",
+        "faucet":"https://testnet.bnbchain.org/faucet-smart"
     },
     {
         "name":"Mumbai",
         "chainId":"0x13881",
-        "imageLink":"/crypto/matic.svg"
+        "imageLink":"/crypto/matic.svg",
+        "explorer":"https://mumbai.polygonscan.com/",
+        "faucet":"https://faucet.polygon.technology/"
     },
     {
         "name":"Sparknet",
         "chainId":"0x7b",
-        "imageLink":"/crypto/fuse.svg"
+        "imageLink":"/crypto/fuse.svg",
+        "explorer":"https://explorer.fusespark.io/",
+        "faucet":"https://get.fusespark.io"
     }
 ]

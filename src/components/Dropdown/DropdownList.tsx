@@ -1,23 +1,25 @@
 import './DropdownList.css'
+import { ethers } from 'ethers'
 import { useEffect, useState } from 'react'
-import { 
-    DropdownType, 
-    IDropDownItem, 
-    IParentCoords 
+import {
+    DropdownType,
+    IDropDownItem,
+    IParentCoords
 } from '../../types/ui.ts'
 import {
-    setFromChain, 
+    setFromChain,
     setToChain,
     setFromTokens,
     setToTokens,
-    changeMetamaskAccount
+    changeMetamaskAccount,
+    getTokenBalance,
 } from '../../data/bridgeSlice.ts'
 import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../../data/store.ts'
+import { AppDispatch, useAppSelector } from '../../data/store.ts'
 import { TChangeMMChain } from '../../types/blockchain.ts'
 import { hasCookies, readCookieByKey } from '../../utils/cookies.ts'
-import { metamask} from '../../utils/metamask.ts'
-const chains = require('../../data/chains.json')
+import { metamask } from '../../utils/metamask.ts'
+import { CHAINS, SupportedTokens } from '../../data/consts.ts'
 
 const DropdownList = (props: {
     items: IDropDownItem[],
@@ -32,13 +34,31 @@ const DropdownList = (props: {
 
     const dispatch = useDispatch();
     const asyncDispatch = useDispatch<AppDispatch>();
+    const bridgeState = useAppSelector((state: any) => state.bridge);
+    const metamaskState = useAppSelector((state: any) => state.metamask);
 
     useEffect(() => {
         setTop(props.parentCoords.bottom)
         setLeft(props.parentCoords.left)
-        setWidth(props.parentCoords.width-20)
+        setWidth(props.parentCoords.width - 20)
 
     }, [props.parentCoords]);
+
+    const _getTokenBalance = (tokenName: string) => {
+        
+        const token = SupportedTokens.filter((t: any) => t.name === tokenName)[0];
+        const fromChain:string = bridgeState.fromChain;
+        const rpcs = CHAINS[fromChain.toLowerCase()].rpcUrls;
+
+        asyncDispatch(getTokenBalance({
+            account: metamaskState.account,
+            // @ts-ignore
+            contractAddress: token.chains[fromChain],
+            abi: token.abi,
+            provider: new ethers.providers.JsonRpcProvider(rpcs[0]),
+            decimals: token.decimals
+        }))
+    }
 
     const onListItemClick = (item: IDropDownItem) => {
         // Change the global state
@@ -46,9 +66,9 @@ const DropdownList = (props: {
             case DropdownType.fromChain:
                 dispatch(setFromChain(item.name))
                 const mmAccount: TChangeMMChain = {
-                    ethereum:(window as any).ethereum,
-                    newChain:chains[item.name.toLowerCase()]
-                    }
+                    ethereum: (window as any).ethereum,
+                    newChain: CHAINS[item.name.toLowerCase()]
+                }
                 asyncDispatch(changeMetamaskAccount(mmAccount))
                 break;
             case DropdownType.toChain:
@@ -58,11 +78,13 @@ const DropdownList = (props: {
                 // Currently only support the same token
                 dispatch(setFromTokens(item.name))
                 dispatch(setToTokens(item.name))
+                _getTokenBalance(item.name)
                 break;
             case DropdownType.toTokens:
                 // Currently only support the same token
                 dispatch(setToTokens(item.name))
                 dispatch(setFromTokens(item.name))
+                _getTokenBalance(item.name)
                 break;
             default:
                 break;
@@ -70,7 +92,7 @@ const DropdownList = (props: {
     }
 
     const onWindowReload = () => {
-        if(hasCookies()){
+        if (hasCookies()) {
             // FROM CHAIN
             const fromChain = readCookieByKey('fromChain');
             dispatch(setFromChain(fromChain))

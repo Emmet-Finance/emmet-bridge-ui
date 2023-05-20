@@ -25,7 +25,6 @@ const Header = () => {
             if (metamask) {
                 dispatch(getEvmAccounts());
                 dispatch(getCurrentChainId());
-                dispatch(getEvmAccounts());
             }
 
         } catch (error) {
@@ -54,7 +53,7 @@ const Header = () => {
                 ? (metamask
                     ? (<button className='wallet-button' onClick={() => copyAddressToClipboard(account)}>
                         <p>
-                            {account.slice(0, 4)}...
+                            {account.slice(0, 5)}...
                             {account.slice(38, 42)}
                         </p>
                         <img src="/crypto/copy-white.png" alt="Copy" className='copy-address' />

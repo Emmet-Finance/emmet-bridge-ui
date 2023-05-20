@@ -19,3 +19,11 @@ export type TChangeMMChain = {
         rpcUrls: string[]
     }
 }
+
+export type TokenBalanceParams = {
+    account:string,
+    contractAddress:string,
+    abi:any,
+    provider:any,
+    decimals:number
+}

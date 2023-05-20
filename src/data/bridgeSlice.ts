@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { chainNameToLogo, tokenNameToLogo } from "../utils/ui.ts";
-import { TChangeMMChain } from '../types/blockchain.ts';
+import { TChangeMMChain, TokenBalanceParams } from '../types/blockchain.ts';
 import { addCookie } from '../utils/cookies.ts';
+import { ChainLogos, TokenLogos } from './consts.ts';
+import { ethers } from 'ethers';
 
 /**
  * Switches Metamask to another chain
@@ -30,6 +31,15 @@ export const changeMetamaskAccount = createAsyncThunk('change-metamask-account',
     }
 });
 
+export const getTokenBalance = createAsyncThunk('get-token-balance', async (params:TokenBalanceParams) => {
+    const {account, contractAddress, abi, provider, decimals} = params;
+    const contract = new ethers.Contract(contractAddress, abi, provider);
+    const balance = await contract.balanceOf(account);
+    console.log("balance", balance);
+    
+    return ethers.utils.formatUnits(balance, decimals);
+})
+
 export const bridgeSlice = createSlice({
     name:"bridge",
     initialState:{
@@ -41,27 +51,32 @@ export const bridgeSlice = createSlice({
         fromTokensLogo:'',
         toTokens:'Select',
         toTokensLogo:'',
+        tokenBalance:0,
         cookieExpires:{days:0,hours:1,minutes:0,seconds:0}
     },
     reducers:{
         setFromChain:(state:any, action) => {
             state.fromChain = action.payload;
-            state.fromChainLogo = chainNameToLogo(action.payload);
+            //@ts-ignore
+            state.fromChainLogo = ChainLogos[action.payload];
             addCookie({key:"fromChain", value:state.fromChain, ...state.cookieExpires});
         },
         setToChain:(state:any, action) => {
             state.toChain = action.payload;
-            state.toChainLogo = chainNameToLogo(action.payload);
+            //@ts-ignore
+            state.toChainLogo = ChainLogos[action.payload];
             addCookie({key:"toChain", value:state.toChain, ...state.cookieExpires});
         },
         setFromTokens:(state:any, action) => {
             state.fromTokens = action.payload;
-            state.fromTokensLogo = tokenNameToLogo(action.payload);
+            // @ts-ignore
+            state.fromTokensLogo = TokenLogos[action.payload];
             addCookie({key:"fromTokens", value:state.fromTokens, ...state.cookieExpires});
         },
         setToTokens:(state:any, action) => {
             state.toTokens = action.payload;
-            state.toTokensLogo = tokenNameToLogo(action.payload);
+            // @ts-ignore
+            state.toTokensLogo = TokenLogos[action.payload];
             addCookie({key:"toTokens", value:state.toTokens, ...state.cookieExpires});
         },
     },
@@ -70,7 +85,8 @@ export const bridgeSlice = createSlice({
         // Switch Metamask Network
         .addCase(changeMetamaskAccount.fulfilled, (state:any, action) => {
             state.fromChain = action.payload.chainName;
-            state.fromChainLogo = chainNameToLogo(action.payload.chainName);
+            // @ts-ignore
+            state.fromChainLogo = ChainLogos[action.payload.chainName];
             state.error = '';
             state.pending = false;
         })
@@ -80,6 +96,12 @@ export const bridgeSlice = createSlice({
         })
         .addCase(changeMetamaskAccount.rejected, (state:any) => {
             state.error = 'Change Metamask Network - rejected';
+            state.pending = false;
+        })
+        // Token Balance
+        .addCase(getTokenBalance.fulfilled, (state:any, action) => {
+            state.tokenBalance = action.payload;
+            state.error = '';
             state.pending = false;
         })
     }
