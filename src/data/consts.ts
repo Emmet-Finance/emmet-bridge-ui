@@ -1,20 +1,35 @@
 
+// Native token contracts' abi
 import USDT_ABI from '../contracts/USDT.ts';
+import DAI_ABI from '../contracts/DAI.ts';
+import BUSD_ABI from '../contracts/BUSD.ts';
+// Wrapped tokens contract abi
+import WrappedERC20 from '../contracts/WrappedERC20.ts'
+import { ChainNames, TokenNames } from '../types/blockchain.ts';
+import { SupportedTokenType } from '../types/blockchain.ts';
+// Chain data
 export const CHAINS = require('./chains.json');
+
+export const ChainIndices = {
+    Goerly : 1,
+    tBSC: 2,
+    Mumbai: 3,
+    Sparknet: 4
+}
 
 export const ChainIdToName = {
 
     // Mainnet
-    "0x1": "Ethereum",
-    "0x38": "Binance",
-    "0x89": "Polygon",
-    "0x7a": "Fuse",
+    "0x1": ChainNames.Ethereum,
+    "0x38": ChainNames.Binance,
+    "0x89": ChainNames.Polygon,
+    "0x7a": ChainNames.Fuse,
 
     // Testnet
-    "0x5": "Goerly",
-    "0x61": "tBSC",
-    "0x13881": "Mumbai",
-    "0x7b": "Sparknet",
+    "0x5": ChainNames.Goerly,
+    "0x61": ChainNames.tBSC,
+    "0x13881": ChainNames.Mumbai,
+    "0x7b": ChainNames.Sparknet,
 }
 
 export enum ChainNameToId {
@@ -33,18 +48,20 @@ export enum ChainNameToId {
 
 }
 
+// To define whether chain is Mainnet
 export const MainnetNames = [
-    "Ethereum",
-    "Binance",
-    "Polygon",
-    "Fuse"
+    ChainNames.Ethereum,
+    ChainNames.Binance,
+    ChainNames.Polygon,
+    ChainNames.Fuse
 ];
 
+// To define whether chain is Testnet
 export const TestnetNames = [
-    "Goerly",
-    "tBSC",
-    "Mumbai",
-    "Sparknet"
+    ChainNames.Goerly,
+    ChainNames.tBSC,
+    ChainNames.Mumbai,
+    ChainNames.Sparknet
 ];
 
 export const ChainLogos = {
@@ -59,46 +76,57 @@ export const ChainLogos = {
 }
 
 export const TokenLogos = {
-    USDT: "/crypto/usdt.svg",
-    USDC: "/crypto/usdc.svg",
+    BNB: "/crypto/bnb.svg",
+    BTC: "/crypto/btcb.svg",
     BUSD: "/crypto/busd.svg",
+    DAI: "/crypto/dai.svg",
+    FUSE: "/crypto/fuse.svg",
+    USDC: "/crypto/usdc.svg",
+    USDT: "/crypto/usdt.svg",
+    WBTC: "/crypto/wbtc.svg",
 }
 
-export const SupportedTokens = [
+export const SupportedTokens: SupportedTokenType[] = [
     {
-        abi: USDT_ABI,
-        chains: {
-            tBSC: "0xf2851831674d1630f49a9c000A34d5A8E167577C",
-            Mumbai: "0x0A6A1Beb7b0b3545578818f45f4e6219615d25aD",
-            Goerly: "0x291E558C60FB567087D9b87bd62b84Af67b9a376",
-            Sparknet: "0x6b30f76CecE9F92D27f0e9Ad78312E77709E74A5",
+        nativeABI: USDT_ABI,
+        nativeChain: ChainNames.Goerly,
+        wrappedABI: WrappedERC20,
+        contractAddresses: {
+            Goerly: CHAINS.goerly.nativeTokens.USDT.address,
+            tBSC: CHAINS.tbsc.wrappedTokens.USDT.address,
+            Mumbai: CHAINS.mumbai.wrappedTokens.USDT.address,
+            Sparknet: CHAINS.sparknet.wrappedTokens.USDT.address,
         },
-        decimals:18,
-        imageLink: "/crypto/usdt.svg",
-        name: "USDT",
+        decimals:CHAINS.goerly.nativeTokens.USDT.decimals,
+        imageLink: TokenLogos.USDT,
+        name: TokenNames.USDT,
     },
     {
-        abi:[''],
-        chains: {
-            tBSC: "",
-            Mumbai: "",
-            Goerly: "",
-            Sparknet: "",
+        nativeABI:DAI_ABI,
+        nativeChain: ChainNames.Goerly,
+        wrappedABI: WrappedERC20,
+        contractAddresses: {
+            Goerly: CHAINS.goerly.nativeTokens.DAI.address ,
+            tBSC: CHAINS.tbsc.wrappedTokens.DAI.address ,
+            Mumbai: CHAINS.mumbai.wrappedTokens.DAI.address ,
+            Sparknet: CHAINS.sparknet.wrappedTokens.DAI.address ,
         },
-        decimals:18,
-        imageLink: "/crypto/usdc.svg",
-        name: "USDC",
+        decimals:CHAINS.goerly.nativeTokens.DAI.decimals,
+        imageLink: TokenLogos.DAI,
+        name: TokenNames.DAI,
     },
     {
-        abi:[''],
-        chains: {
-            tBSC: "",
-            Mumbai: "",
-            Goerly: "",
-            Sparknet: "",
+        nativeABI:BUSD_ABI,
+        nativeChain: ChainNames.Goerly,
+        wrappedABI: WrappedERC20,
+        contractAddresses: {
+            Goerly: CHAINS.goerly.nativeTokens.BUSD.address ,
+            tBSC: CHAINS.tbsc.wrappedTokens.BUSD.address ,
+            Mumbai: CHAINS.mumbai.wrappedTokens.BUSD.address ,
+            Sparknet: CHAINS.sparknet.wrappedTokens.BUSD.address ,
         },
-        decimals:18,
-        name: "BUSD",
-        imageLink: "/crypto/busd.svg",
+        decimals:CHAINS.goerly.nativeTokens.BUSD.decimals,
+        name: TokenNames.BUSD,
+        imageLink: TokenLogos.BUSD,
     }
 ];

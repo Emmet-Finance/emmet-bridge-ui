@@ -1,5 +1,6 @@
 {
     "ethereum": {
+        "bridge":"",
         "chainName": "Ethereum",
         "chainId": "0x1",
         "nativeCurrency": {
@@ -13,9 +14,12 @@
             "https://ethereum.publicnode.com",
             "https://rpc.mevblocker.io",
             "https://rpc.payload.de"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {}
     },
     "goerly": {
+        "bridge":"0x52c5cF8d571b1c8cBF75b5f1bD088C1Dd4598bC7",
         "chainName": "Goerly",
         "chainId": "0x5",
         "nativeCurrency": {
@@ -28,9 +32,25 @@
             "https://eth-goerli.public.blastapi.io",
             "https://goerli.blockpi.network/v1/rpc/public",
             "https://endpoints.omniatech.io/v1/eth/goerli/public"
-        ]
+        ],
+        "nativeTokens": {
+            "BUSD":{
+                "address":"0x2991E99Df3EDD3F15962294A28b0aD1F4d56E07a",
+                "decimals":18
+            },
+            "DAI":{
+                "address":"0x3fcc5C26fAd6B8fC9461E1d6f920A3C96F15f40a",
+                "decimals":18
+            },
+            "USDT":{
+                "address":"0x291E558C60FB567087D9b87bd62b84Af67b9a376",
+                "decimals":18
+            }
+        },
+        "wrappedTokens": {}
     },
     "bsc": {
+        "bridge":"",
         "chainName": "BSC",
         "chainId": "0x38",
         "nativeCurrency": {
@@ -49,9 +69,12 @@
             "https://bsc-dataseed1.defibit.io",
             "https://bsc-dataseed2.defibit.io",
             "https://bsc-dataseed3.defibit.io"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {}
     },
     "tbsc": {
+        "bridge":"0x8c1f71AcE61b152bD2224736813410aD690F68cD",
         "chainName": "tBSC",
         "chainId": "0x61",
         "nativeCurrency": {
@@ -60,16 +83,34 @@
             "decimals": 18
         },
         "rpcUrls": [
+            "https://bsc-testnet.publicnode.com",
+            "https://endpoints.omniatech.io/v1/bsc/testnet/public",
+            "https://data-seed-prebsc-2-s1.binance.org:8545",
             "https://data-seed-prebsc-1-s3.binance.org:8545",
             "https://data-seed-prebsc-2-s3.binance.org:8545",
             "https://data-seed-prebsc-1-s1.binance.org:8545",
-            "https://data-seed-prebsc-2-s1.binance.org:8545",
             "https://data-seed-prebsc-1-s2.binance.org:8545",
             "https://data-seed-prebsc-2-s2.binance.org:8545",
             "https://bsctestapi.terminet.io/rpc"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {
+            "BUSD":{
+                "address":"0xeB7A36D0B2700851c370283c83f31CfC670bF933",
+                "decimals":18
+            },
+            "DAI":{
+                "address":"0x2AEaD32687aB9D18bb63248f94cD0ADA3ce45ce0",
+                "decimals":18
+            },
+            "USDT":{
+                "address":"0x65329f02eb198478E18212253B186D9e1AFA04f9",
+                "decimals":18
+            }
+        }
     },
     "polygon": {
+        "bridge":"",
         "chainName": "Polygon",
         "chainId": "0x89",
         "nativeCurrency": {
@@ -85,9 +126,12 @@
             "https://matic-mainnet.chainstacklabs.com",
             "https://poly-rpc.gateway.pokt.network",
             "https://polygon-bor.publicnode.com"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {}
     },
     "mumbai": {
+        "bridge":"0xb557a0E590B6F6485d0935b644F816E18fDb745d",
         "chainName": "Mumbai",
         "chainId": "0x13881",
         "nativeCurrency": {
@@ -102,9 +146,25 @@
             "https://rpc-mumbai.maticvigil.com",
             "https://matic-testnet-archive-rpc.bwarelabs.com",
             "https://polygontestapi.terminet.io/rpc"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {
+            "BUSD":{
+                "address":"0xCbD10d57EE3bc0088B3db30777E8b415C95f3747",
+                "decimals":18
+            },
+            "DAI":{
+                "address":"0xD55C04E15B9808bf3e561367D12f3B2dfAA55d48",
+                "decimals":18
+            },
+            "USDT":{
+                "address":"0xB44e023C1ec38ee5E4205A3AA07671aF9cF3Cb01",
+                "decimals":18
+            }
+        }
     },
     "fuse": {
+        "bridge":"",
         "chainName": "Fuse",
         "chainId": "0x7a",
         "nativeCurrency": {
@@ -117,9 +177,12 @@
             "https://rpc.fuse.io",
             "https://fuse-rpc.gateway.pokt.network",
             "https://fuse.api.onfinality.io/public"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {}
     },
     "sparknet": {
+        "bridge":"0xf2851831674d1630f49a9c000A34d5A8E167577C",
         "chainName": "Sparknet",
         "chainId": "0x7b",
         "nativeCurrency": {
@@ -129,6 +192,21 @@
         },
         "rpcUrls": [
             "https://rpc.fusespark.io"
-        ]
+        ],
+        "nativeTokens":{},
+        "wrappedTokens": {
+            "BUSD":{
+                "address":"0xbF99037F929222cc7C0aa67acd91A12f4782b96A",
+                "decimals":18
+            },
+            "DAI":{
+                "address":"0xe0157e7a2C90A88371b508aD5818715680010086",
+                "decimals":18
+            },
+            "USDT":{
+                "address":"0x59805ca29E5217b4Ce8cb48e57F9C7EcF0D5604F",
+                "decimals":18
+            }
+        }
     }
 }

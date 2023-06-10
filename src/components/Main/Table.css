@@ -6,11 +6,11 @@
     margin-top: 10%;
     padding: 10px;
     background-color: var(--white);
-    /* box-shadow: 5px 10px var(--gray-100) */
+    /* box-shadow: 5px 10px var(--grey-100) */
 }
 
 .internal-frame{
-    color: var(--gray-500);
+    color: var(--grey-500);
     font-weight: 900;
     display:flexbox;
     flex-direction: row;
@@ -21,6 +21,12 @@
     border: solid 2px;
     border-color: var(--emmet-green);
     border-radius: 10px;
+    display: flex;
+    justify-content:space-evenly;
+    padding: 10px;
+}
+
+.invisible-frame{
     display: flex;
     justify-content:space-evenly;
     padding: 10px;
@@ -42,7 +48,7 @@
 .internal-divider{
     border: solid 2px;
     border-radius: 2px;
-    border-color: var(--gray-500);
+    border-color: var(--grey-500);
     margin: 0 5px 0 5px;
 }
 
@@ -59,38 +65,95 @@ input[type=number] {
   appearance: textfield;
 }
 
-.amount-input {
-    margin: 10px;
-    width: 100%;
+.amount-input, .destination-address {
+    padding: 10px;
+    outline: none;
+    width: 60%;
     font-size: 1em !important;
     font-weight: 600;
-    color: var(--gray-600);
-    border: 0;
-    outline: none;
+    color: var(--grey-600) !important;
+    border-radius: 10px;
+    border-color: var(--grey-100);
+    background-color: var(--white) !important;
 }
 
-.amount-input::placeholder{
-    color: var(--gray-400);
+.amount-input::placeholder, .destination-address::placeholder{
+    color: var(--grey-400);
     font-weight: 500;
 }
 
 .justify-sides{
     justify-content: space-between;
+    align-items: center;
 }
 
 .max-button{
-    color: var(--gray-600);
+    color: var(--grey-600);
     padding-left: 10px;
     padding-right: 10px;
     cursor: pointer;
+    margin-left: 5px;
 }
 
 .group-label {
     margin: 0 0 10px 5px;
+    color: var(--emmet-green)
+}
+
+.margin-right{
+    margin-right: 80px;
+}
+
+.minus-top-margin{
+    margin-top: -10px;
+}
+
+.balance-wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items:start;
+    min-width: 200px;
+}
+
+.align-end{
+    align-items: end;
 }
 
 .swap-image{
     cursor: pointer;
+}
+
+.action-button{
+    background-color:goldenrod;
+    border: solid 1px grey;
+    border-radius: 10px;
+    color:white;
+    font-size:1em;
+    font-weight: 600;
+    padding:15px 30px;
+    cursor: pointer;
+    align-content: center;
+    text-align: center;
+}
+
+button[disabled]{
+    pointer-events: none;
+    background-color: grey;
+    opacity: 0.7;
+    cursor:auto;
+}
+
+button:active{
+    box-shadow: 0 0 5px -1px rgba(0,0,0,0.6);
+}
+
+.vertical-push{
+    margin-top: 30px;
+}
+
+.no-margin{
+    margin:0
 }
 
 @media screen and (max-width: 550px) {
@@ -105,7 +168,7 @@ input[type=number] {
     .amount-input{
         width:95%;
     }
-    .internal-divider{
+    .internal-divider, .vertical-push{
         margin: 5px 0 5px 0;
     }
 }

@@ -3,9 +3,12 @@ import { useRef, useEffect, useState } from 'react';
 import { DropdownType, IDropDownItem, IDropDownProps, IParentCoords } from '../../types/ui.ts'
 import DropdownList from './DropdownList.tsx'
 import { useAppSelector } from '../../data/store.ts';
+import { setTransferAmount } from '../../data/bridgeSlice.ts';
+import { useDispatch } from 'react-redux';
 
 const Dropdown = (props: IDropDownProps) => {
 
+    const dispatch = useDispatch();
     const state = useAppSelector((state: any) => state.bridge);
     const dropdownRef = useRef<HTMLDivElement & DOMRect | any>(null);
     const [dropdownCoordinates, setDropdownCoordinates] = useState({
@@ -53,7 +56,8 @@ const Dropdown = (props: IDropDownProps) => {
                         //@ts-ignore
                         setListItems(filterOther(state.toChain, props.items))
                     }
-                    
+                    // Clears the transfer amount
+                    dispatch(setTransferAmount(0));
                     break;
                 case DropdownType.toChain:
                     setName(state.toChain)
@@ -67,13 +71,17 @@ const Dropdown = (props: IDropDownProps) => {
                     setName(state.fromTokens)
                     setImageLink(state.fromTokensLogo)
                     //@ts-ignore
-                    setListItems(props.items)
+                    setListItems(props.items);
+                    // Clears the transfer amount
+                    dispatch(setTransferAmount(0));
                     break;
                 case DropdownType.toTokens:
                     setName(state.toTokens)
                     setImageLink(state.toTokensLogo)
                     //@ts-ignore
-                    setListItems(props.items)
+                    setListItems(props.items);
+                    // Clears the transfer amount
+                    dispatch(setTransferAmount(0));
                     break;
                 default:
                     break;

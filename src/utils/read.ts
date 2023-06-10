@@ -1,11 +1,11 @@
-import { ethers } from 'ethers'
+import { ethers } from 'ethers';
 
 /**
  * Creates a Web3Provider
  * @returns a Web3Provider
  */
 export const getEvmProvider = (): ethers.providers.Web3Provider => {
-    return new ethers.providers.Web3Provider((window as any).ethereum);
+    return new ethers.providers.Web3Provider(window.ethereum, 'any');
 }
 
 /**

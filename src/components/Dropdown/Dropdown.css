@@ -6,7 +6,7 @@
     cursor: pointer;
     border: solid 1px;
     border-radius: 10px;
-    border-color: var(--gray-200);
+    border-color: var(--grey-200);
     font-size: 0.7em;
 }
 

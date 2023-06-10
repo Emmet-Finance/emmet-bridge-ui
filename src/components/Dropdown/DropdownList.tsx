@@ -17,8 +17,6 @@ import {
 import { useDispatch } from 'react-redux'
 import { AppDispatch, useAppSelector } from '../../data/store.ts'
 import { TChangeMMChain } from '../../types/blockchain.ts'
-import { hasCookies, readCookieByKey } from '../../utils/cookies.ts'
-import { metamask } from '../../utils/metamask.ts'
 import { CHAINS, SupportedTokens } from '../../data/consts.ts'
 
 const DropdownList = (props: {
@@ -45,18 +43,29 @@ const DropdownList = (props: {
     }, [props.parentCoords]);
 
     const _getTokenBalance = (tokenName: string) => {
-        
+
         const token = SupportedTokens.filter((t: any) => t.name === tokenName)[0];
-        const fromChain:string = bridgeState.fromChain;
-        const rpcs = CHAINS[fromChain.toLowerCase()].rpcUrls;
+
+        const fromChain: string = bridgeState.fromChain
+            ? bridgeState.fromChain
+            : '';
+        
+        const rpcs = CHAINS[fromChain.toLowerCase()].rpcUrls
+            ? CHAINS[fromChain.toLowerCase()].rpcUrls
+            : '';
+        
+            const abi = fromChain && fromChain === token.nativeChain
+            ? token.nativeABI
+            : token.wrappedABI;
 
         asyncDispatch(getTokenBalance({
             account: metamaskState.account,
             // @ts-ignore
-            contractAddress: token.chains[fromChain],
-            abi: token.abi,
+            contractAddress: token.contractAddresses[fromChain],
+            abi,
             provider: new ethers.providers.JsonRpcProvider(rpcs[0]),
-            decimals: token.decimals
+            decimals: token.decimals,
+            bridge: CHAINS[fromChain.toLowerCase()].bridge
         }))
     }
 
@@ -90,32 +99,6 @@ const DropdownList = (props: {
                 break;
         }
     }
-
-    const onWindowReload = () => {
-        if (hasCookies()) {
-            // FROM CHAIN
-            const fromChain = readCookieByKey('fromChain');
-            dispatch(setFromChain(fromChain))
-            // TO CHAIN
-            const toChain = readCookieByKey('toChain');
-            dispatch(setToChain(toChain))
-            // FROM TOKENS
-            const fromTokens = readCookieByKey('fromTokens');
-            dispatch(setFromTokens(fromTokens))
-            // TO TOKENS
-            const toTokens = readCookieByKey('toTokens');
-            dispatch(setToTokens(toTokens))
-        }
-    }
-
-    window.addEventListener("load", (event) => {
-        onWindowReload()
-    });
-
-    metamask.on('chainChanged', () => {
-        onWindowReload()
-        window.location.reload();
-    })
 
     return (
         <div>
