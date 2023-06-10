@@ -52,6 +52,23 @@
     margin: 0 5px 0 5px;
 }
 
+.transaction-hash-link {
+    margin-left: 5px;
+    color:cornflowerblue;
+}
+
+.success, .failure {
+    margin-left: 5px;
+}
+
+.success {
+    color: var(--emmet-green);
+}
+
+.failure {
+    color:deeppink;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -120,6 +137,10 @@ input[type=number] {
     align-items: end;
 }
 
+.text-align-left {
+    text-align: left;
+}
+
 .swap-image{
     cursor: pointer;
 }
@@ -154,6 +175,10 @@ button:active{
 
 .no-margin{
     margin:0
+}
+
+.push-sides {
+    width:20%;
 }
 
 @media screen and (max-width: 550px) {

@@ -1,5 +1,3 @@
-import { ChainNames, TokenNames } from "./blockchain";
-
 export type NumString = number | string;
 
 export type CurrentChain = {

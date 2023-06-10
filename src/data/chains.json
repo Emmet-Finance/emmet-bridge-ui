@@ -3,6 +3,7 @@
         "bridge":"",
         "chainName": "Ethereum",
         "chainId": "0x1",
+        "explorer":"https://etherscan.io",
         "nativeCurrency": {
             "name": "ETH",
             "symbol": "ETH",
@@ -22,6 +23,7 @@
         "bridge":"0x52c5cF8d571b1c8cBF75b5f1bD088C1Dd4598bC7",
         "chainName": "Goerly",
         "chainId": "0x5",
+        "explorer":"https://goerli.etherscan.io",
         "nativeCurrency": {
             "name": "ETH",
             "symbol": "ETH",
@@ -53,6 +55,7 @@
         "bridge":"",
         "chainName": "BSC",
         "chainId": "0x38",
+        "explorer":"https://bscscan.com",
         "nativeCurrency": {
             "name": "BNB",
             "symbol": "BNB",
@@ -77,6 +80,7 @@
         "bridge":"0x8c1f71AcE61b152bD2224736813410aD690F68cD",
         "chainName": "tBSC",
         "chainId": "0x61",
+        "explorer":"https://testnet.bscscan.com",
         "nativeCurrency": {
             "name": "tBNB",
             "symbol": "tBNB",
@@ -113,6 +117,7 @@
         "bridge":"",
         "chainName": "Polygon",
         "chainId": "0x89",
+        "explorer":"https://polygonscan.com",
         "nativeCurrency": {
             "name": "MATIC",
             "symbol": "MATIC",
@@ -134,6 +139,7 @@
         "bridge":"0xb557a0E590B6F6485d0935b644F816E18fDb745d",
         "chainName": "Mumbai",
         "chainId": "0x13881",
+        "explorer":"https://mumbai.polygonscan.com",
         "nativeCurrency": {
             "name": "MATIC",
             "symbol": "MATIC",
@@ -167,6 +173,7 @@
         "bridge":"",
         "chainName": "Fuse",
         "chainId": "0x7a",
+        "explorer":"https://explorer.fuse.io",
         "nativeCurrency": {
             "name": "FUSE",
             "symbol": "FUSE",
@@ -185,6 +192,7 @@
         "bridge":"0xf2851831674d1630f49a9c000A34d5A8E167577C",
         "chainName": "Sparknet",
         "chainId": "0x7b",
+        "explorer":"https://explorer.fusespark.io/",
         "nativeCurrency": {
             "name": "SPARK",
             "symbol": "SPARK",

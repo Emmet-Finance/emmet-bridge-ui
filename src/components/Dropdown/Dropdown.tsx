@@ -5,6 +5,7 @@ import DropdownList from './DropdownList.tsx'
 import { useAppSelector } from '../../data/store.ts';
 import { setTransferAmount } from '../../data/bridgeSlice.ts';
 import { useDispatch } from 'react-redux';
+import { clearState } from '../../data/metamaskSlice.ts';
 
 const Dropdown = (props: IDropDownProps) => {
 
@@ -48,6 +49,9 @@ const Dropdown = (props: IDropDownProps) => {
     useEffect(() => {
 
         const handleUpdateComponent = () => {
+            
+            dispatch(clearState());
+
             switch (props.type) {
                 case DropdownType.fromChain:
                     setName(state.fromChain)

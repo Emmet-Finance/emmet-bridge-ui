@@ -75,6 +75,7 @@ export const metamaskSlice = createSlice({
         accounts: [],
         approvedAmt: 0,
         approvedHash: '',
+        approveSuccess: false,
         balance: undefined,
         chainId: 0,
         error: '',
@@ -83,14 +84,19 @@ export const metamaskSlice = createSlice({
         isTestnet: false,
         pending: false,
         transferHash: '',
+        transferSuccess: false,
     },
     reducers: {
         setIsConnected: (state: any, action) => {
             state.isConnected = action.payload;
         },
-        clearApproval: (state: any) => {
+        clearState: (state: any) => {
             state.approvedAmt = 0;
-            state.approvedHash = ''
+            state.approvedHash = '';
+            state.transferHash = '';
+            state.transferSuccess = false;
+            state.error = '';
+            state.pending = false;
         }
     },
     extraReducers: (builder) => {
@@ -157,20 +163,28 @@ export const metamaskSlice = createSlice({
                 if (status === 1) {
                     state.approvedAmt = amount;
                     state.approvedHash = hash;
+                    state.approveSuccess = true;
+                    state.error = '';
+                    state.pending = false;
                 } else {
                     state.approvedAmt = 0;
                     state.approvedHash = ''
+                    state.approveSuccess = false;
+                    state.error = '';
+                    state.pending = false;
                 }
             })
             .addCase(approveTokenAmount.pending, (state: any) => {
                 state.approvedAmt = 0;
                 state.approvedHash = '';
+                state.approveSuccess = false;
                 state.error = '';
                 state.pending = true;
             })
             .addCase(approveTokenAmount.rejected, (state: any) => {
                 state.approvedAmt = 0;
                 state.approvedHash = '';
+                state.approveSuccess = false;
                 state.error = 'Approve transaction - rejected';
                 state.pending = false;
             })
@@ -179,8 +193,14 @@ export const metamaskSlice = createSlice({
                 const { hash, status } = action.payload;
                 if (status === 1) {
                     state.transferHash = hash;
+                    state.transferSuccess = true
+                    state.error = '';
+                    state.pending = false;
                 } else {
                     state.transferHash = '';
+                    state.transferSuccess = false
+                    state.error = '';
+                    state.pending = false;
                 }
             })
             .addCase(sendInstallment.pending, (state: any) => {
@@ -198,5 +218,5 @@ export const metamaskSlice = createSlice({
 
 export const {
     setIsConnected,
-    clearApproval
+    clearState
 } = metamaskSlice.actions;

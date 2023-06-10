@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import './Table.css';
 import Dropdown from '../Dropdown/Dropdown';
+import Spinner from './Spinner.tsx';
 import { DropdownType, IDropDownItem } from '../../types/ui.ts';
 import { AppDispatch, useAppSelector } from '../../data/store.ts'
 import { isValidEvmAddress, roundTwoDigits } from '../../utils/ui.ts';
@@ -18,8 +19,8 @@ export default function BridgeForm() {
 
     const metamaskState = useAppSelector((state: any) => state.metamask);
     const bridgeState = useAppSelector((state: any) => state.bridge);
-    const { balance, account, approvedAmt } = metamaskState;
-    const { fromChain, toChain, fromTokens, tokenBalance, tokenAllowance } = bridgeState;
+    const { balance, account, approvedAmt, approvedHash, approveSuccess, transferHash, transferSuccess, pending } = metamaskState;
+    const { fromChain, toChain, fromTokens, tokenBalance, tokenAllowance, } = bridgeState;
 
     const [addressValue, setAddressValue] = useState(bridgeState.destinationAddress);
     const [amountValue, setAmountValue] = useState(bridgeState.transferAmount);
@@ -226,10 +227,25 @@ export default function BridgeForm() {
             {/* =================================================== */}
             <div className='internal-frame minus-top-margin'>
                 <div className='invisible-frame'>
-                    <span className='balance-wrapper'>
-                        {approvedAmt && fromTokens
+                    {/* Approved / Allowance */}
+                    <span className='balance-wrapper text-align-left'>
+                        {approvedAmt && fromTokens && approvedHash && approveSuccess
                             ? (<div>
-                                <div>Approved:</div>
+                                <a
+                                    href={`${CHAINS[fromChain.toLowerCase()].explorer}/tx/${approvedHash}`}
+                                    className='transaction-hash-link'
+                                    target="_blank"
+                                    rel="noreferrer"
+                                >
+                                    Approved:
+                                </a>
+                                <span>
+                                    {approveSuccess
+                                        ? <span className='success'>Success</span>
+                                        : <span className='failure'>Failure</span>
+                                    }
+                                </span>
+                                <br/>
                                 <span>
                                     {fromTokens + ": " + roundTwoDigits(approvedAmt, 2)}
                                 </span>
@@ -243,6 +259,34 @@ export default function BridgeForm() {
                                 </div>)
                                 : ''}
 
+                    </span>
+                    {/* ------------------------------------- */}
+                    <span
+                        className='push-sides'
+                    >
+                        {pending ? <Spinner /> : ''}
+                    </span>
+                    {/* ------------------------------------- */}
+                    <span className='balance-wrapper align-end'>
+                        {transferHash && CHAINS && fromChain
+                            ? (<div>
+                                <div>Transfer hash:</div>
+                                <span>
+                                    <a
+                                        href={`${CHAINS[fromChain.toLowerCase()].explorer}/tx/${transferHash}`}
+                                        className='transaction-hash-link'
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >View</a>
+                                </span>
+                                <span>
+                                    {transferSuccess
+                                        ? <span className='success'>Success</span>
+                                        : <span className='failure'>Failure</span>
+                                    }
+                                </span>
+                            </div>)
+                            : ''}
                     </span>
                 </div>
             </div>
@@ -264,7 +308,7 @@ export default function BridgeForm() {
                         className='action-button'
                         disabled={
                             amountValue === 0
-                            || ! toChain
+                            || !toChain
                             || (
                                 amountValue > approvedAmt
                                 && tokenAllowance < amountValue)
