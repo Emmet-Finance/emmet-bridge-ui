@@ -187,7 +187,7 @@ export default function BridgeForm() {
             {/* =================================================== */}
             <div className='internal-frame'>
                 <span className='group-label margin-right'>3. Amount to transfer</span>
-                <span className='group-label'>4. Target Address</span>
+                <span className='group-label mobile-invisible'>4. Target Address</span>
                 <div className='green-frame'>
                     <span className='no-margin'>
                         <input

@@ -190,10 +190,44 @@ button:active{
         flex-direction:column-reverse;
         font-size: 1em;
     }
-    .amount-input{
-        width:95%;
+    .amount-input, .destination-address{
+        width:65%;
     }
     .internal-divider, .vertical-push{
         margin: 5px 0 5px 0;
+    }
+    .invisible-frame{
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        flex-wrap: wrap;
+        align-content: center !important;
+        padding:10px;
+    }
+    .balance-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:center;
+        
+    }
+    .swap-image{
+        display: flex;
+        align-self: center;
+    }
+
+    .action-button{
+        margin: 5px 0 5px 0;
+        padding:5px 40px;
+        height: 50px;
+    }
+
+    .mobile-invisible {
+        display: none;
+        visibility: hidden;
+    }
+
+    .max-button{
+        padding: 0 15px;
     }
 }

@@ -15,6 +15,13 @@
     http-equiv="Content-Security-Policy"
     content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline';"
   />
+  <script type='text/javascript' charset='UTF-8'>
+    (function (config) {  
+        config.urlCapture = { 
+            filterURLQuery: ["amount", "destination"]
+        }
+    })(window['adrum-config'] || (window['adrum-config'] = {}));
+</script>
   <title>Emmet Bridge</title>
 </head>
 
