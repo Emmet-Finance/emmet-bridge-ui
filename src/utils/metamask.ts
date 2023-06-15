@@ -1,6 +1,17 @@
 export let currentAccount: any = null;
 export let chainId: any = null;
-export const metamask = (window as any).ethereum;
+let metamask: any;
+
+try {
+
+    metamask = (window as any).ethereum;
+    
+} catch (error) {
+    console.error(error);
+}
+
+export {metamask};
+
 
 /** V
  * Sets the currentAccount to accounts[0]

@@ -128,8 +128,8 @@ input[type=number] {
 .balance-wrapper{
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    align-items:start;
+    justify-content: flex-start;
+    align-items:flex-start;
     min-width: 200px;
 }
 

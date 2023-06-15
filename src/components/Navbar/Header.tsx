@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import {
     getCurrentChainId,
     getEvmAccounts,
+    setIsConnected,
 } from '../../data/metamaskSlice.ts';
 import {
     AppDispatch,
@@ -18,6 +19,7 @@ const Header = () => {
     const {
         account,
         isTestnet,
+        isConnected
     } = state;
 
     const connectWallet = async () => {
@@ -36,10 +38,13 @@ const Header = () => {
         connectWallet();
     });
 
-    metamask.on('chainChanged', () => {
-        connectWallet();
-        window.location.reload();
-    });
+    if(metamask){
+        metamask.on('chainChanged', () => {
+            connectWallet();
+            dispatch(setIsConnected(true))
+            window.location.reload();
+        });
+    }
 
     return (
         <header className='justify-content-between'>
@@ -50,7 +55,7 @@ const Header = () => {
                 </span>)
                 : ''}
             {metamask
-                ? (metamask
+                ? (isConnected
                     ? (<button className='wallet-button' onClick={() => copyAddressToClipboard(account)}>
                         <p>
                             {account.slice(0, 5)}...

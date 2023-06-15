@@ -59,12 +59,14 @@ export default function App() {
     onWindowReload()
   });
 
-  metamask.on('chainChanged', () => {
-    onWindowReload()
-    window.location.reload();
-  });
+  if(metamask){
+    metamask.on('chainChanged', () => {
+      onWindowReload()
+      window.location.reload();
+    });
+  }
 
-  if (metamaskState.error) {
+  if (metamaskState && metamaskState.error) {
     console.error(metamaskState.error)
   }
 
